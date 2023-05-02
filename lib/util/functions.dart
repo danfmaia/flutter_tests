@@ -3,9 +3,8 @@ import 'dart:convert';
 import 'package:flutter_tests/models/album.dart';
 import 'package:http/http.dart' as http;
 
-Future<Album> fetchAlbum() async {
-  final response = await http
-      .get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1'));
+Future<Album> fetchAlbum(http.Client client) async {
+  final response = await client.get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1'));
 
   if (response.statusCode == 200) {
     return Album.fromJson(jsonDecode(response.body));
